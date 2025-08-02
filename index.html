@@ -1,29 +1,30 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>My Dinosaur AR</title>
-    <meta charset="utf-8">
-    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.min.js"></script>
+    <title>My Location AR</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/ar.js@3.3.2/aframe/build/aframe-ar-nft.js"></script>
+    <script src="https://rawcdn.githack.com/AR-js-org/AR.js/3.3.2/aframe/build/aframe-ar.js"></script>
   </head>
+
   <body style="margin: 0; overflow: hidden;">
-    <a-scene embedded arjs>
+    <a-scene 
+      embedded 
+      arjs="sourceType: webcam; gpsMinAccuracy: 100; debugUIEnabled: false;"
+      vr-mode-ui="enabled: false">
 
-      <!-- กล้อง -->
-      <a-entity camera></a-entity>
+      <!-- กล้องที่เชื่อม GPS -->
+      <a-camera gps-camera rotation-reader></a-camera>
 
-      <!-- Marker -->
-      <a-marker type="pattern" url="t1.patt">
+      <!-- ✅ โมเดลจะแสดง ณ พิกัด 14.9871667, 102.1196944 -->
+      <a-entity 
+        gps-entity-place="latitude: 14.9871667; longitude: 102.1196944" 
+        gltf-model="spino.glb" 
+        scale="2 2 2" 
+        rotation="0 180 0">
+      </a-entity>
 
-        <!-- โมเดล -->
-        <a-entity gltf-model="spino.glb"
-                  scale="1 1 1"
-                  position="0 0.5 0"
-                  rotation="-90 0 0">
-        </a-entity>
-
-      </a-marker>
-      
     </a-scene>
   </body>
 </html>
