@@ -9,9 +9,9 @@
   </head>
   <body style="margin: 0; overflow: hidden;">
     <a-scene 
-      embedded 
-      vr-mode-ui="enabled: false"
-      arjs="sourceType: webcam; gpsMinAccuracy: 100; debugUIEnabled: false;">
+  embedded 
+  vr-mode-ui="enabled: false"
+  arjs="sourceType: webcam; gpsMinAccuracy: 30; debugUIEnabled: true">
       
       <!-- 📷 กล้อง + GPS -->
       <a-camera gps-camera rotation-reader></a-camera>
@@ -35,7 +35,7 @@
 
       <!-- 🅱 จุด B -->
       <a-entity 
-        gps-entity-place="latitude: 14.9871800; longitude: 102.1197000">
+gps-entity-place="latitude: 14.9872500; longitude: 102.1197500"
         <a-entity 
           gltf-model="spino.glb"
           scale="1.2 1.2 1.2"
@@ -52,7 +52,8 @@
 
       <!-- 🆑 จุด C -->
       <a-entity 
-        gps-entity-place="latitude: 14.9872000; longitude: 102.1197100">
+        gps-entity-place="latitude: 14.9873500; longitude: 102.1198000"
+
         <a-entity 
           gltf-model="spino.glb"
           scale="1 1 1"
