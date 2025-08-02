@@ -3,9 +3,37 @@
   <head>
     <title>My Location AR</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    
+    <!-- A-Frame & AR.js -->
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/ar.js@3.3.2/aframe/build/aframe-ar-nft.js"></script>
     <script src="https://rawcdn.githack.com/AR-js-org/AR.js/3.3.2/aframe/build/aframe-ar.js"></script>
+
+    <!-- Gesture support (หมุน/ขยายโมเดลด้วยนิ้ว) -->
+    <script src="https://unpkg.com/aframe-extras@6.1.1/dist/aframe-extras.min.js"></script>
+    <script src="https://unpkg.com/aframe-gesture-detector/dist/aframe-gesture-detector.min.js"></script>
+    <script>
+      AFRAME.registerComponent("pinch-scale", {
+        schema: {
+          min: { default: 0.1 },
+          max: { default: 5 }
+        },
+        init: function () {
+          this.initialScale = this.el.object3D.scale.clone();
+          this.scaleFactor = 1;
+          this.el.addEventListener("twofingermove", (e) => {
+            this.scaleFactor *= 1 + e.detail.spreadChange / 200;
+            this.scaleFactor = Math.min(this.data.max, Math.max(this.data.min, this.scaleFactor));
+            const s = this.scaleFactor;
+            this.el.object3D.scale.set(
+              this.initialScale.x * s,
+              this.initialScale.y * s,
+              this.initialScale.z * s
+            );
+          });
+        },
+      });
+    </script>
   </head>
 
   <body style="margin: 0; overflow: hidden;">
@@ -14,15 +42,18 @@
       arjs="sourceType: webcam; gpsMinAccuracy: 100; debugUIEnabled: false;"
       vr-mode-ui="enabled: false">
 
-      <!-- กล้องที่เชื่อม GPS -->
+      <!-- กล้อง -->
       <a-camera gps-camera rotation-reader></a-camera>
 
-      <!-- ✅ โมเดลจะแสดง ณ พิกัด 14.9871667, 102.1196944 -->
+      <!-- โมเดล ณ พิกัดที่ระบุ -->
       <a-entity 
         gps-entity-place="latitude: 14.9871667; longitude: 102.1196944" 
-        gltf-model="spino.glb" 
-        scale="1 1 1" 
-        rotation="0 180 0">
+        gltf-model="model/spino.glb" 
+        scale="0.1 0.1 0.1" 
+        rotation="0 180 0"
+        gesture-detector
+        pinch-scale
+        animation="property: rotation; to: 0 360 0; loop: true; dur: 10000">
       </a-entity>
 
     </a-scene>
