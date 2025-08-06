@@ -1,75 +1,28 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>AR Nearby Points with Labels</title>
+    <title>My Dinosaur AR</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.min.js"></script>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/2.2.1/aframe/build/aframe-ar.min.js"></script>
   </head>
+
   <body style="margin: 0; overflow: hidden;">
-    <a-scene 
-  embedded 
-  vr-mode-ui="enabled: false"
-  arjs="sourceType: webcam; gpsMinAccuracy: 30; debugUIEnabled: true">
+    <a-scene embedded arjs="sourceType: webcam;">
       
-      <!-- 📷 กล้อง + GPS -->
-      <a-camera gps-camera rotation-reader></a-camera>
+      <!-- กล้อง -->
+      <a-entity camera></a-entity>
 
-      <!-- 🅰 จุด A -->
-      <a-entity 
-        gps-entity-place="latitude: 14.9871600; longitude: 102.1196900">
+      <!-- Marker -->
+      <a-marker type="pattern" url="marker/t1.patt">
         <a-entity 
-          gltf-model="t2.fbx"
-          scale="1.5 1.5 1.5"
-          rotation="0 180 0">
+          gltf-model="model/test.glb" 
+          position="0 1 0" 
+          scale="0.5 0.5 0.5"
+          rotation="-90 0 0">
         </a-entity>
-        <a-text 
-          value="จุด A" 
-          align="center"
-          position="0 2 0" 
-          scale="4 4 4" 
-          color="#ffcc00">
-        </a-text>
-      </a-entity>
-
-      <!-- 🅱 จุด B -->
-      <a-entity 
-gps-entity-place="latitude: 14.9872500; longitude: 102.1197500"
-        <a-entity 
-          gltf-model="spino.glb"
-          scale="1.2 1.2 1.2"
-          rotation="0 90 0">
-        </a-entity>
-        <a-text 
-          value="จุด B" 
-          align="center"
-          position="0 1.8 0" 
-          scale="4 4 4" 
-          color="#00ccff">
-        </a-text>
-      </a-entity>
-
-      <!-- 🆑 จุด C -->
-      <a-entity 
-        gps-entity-place="latitude: 14.9873500; longitude: 102.1198000"
-
-        <a-entity 
-          gltf-model="t3.fbx"
-          scale="1 1 1"
-          rotation="0 0 0">
-        </a-entity>
-        <a-text 
-          value="จุด C" 
-          align="center"
-          position="0 1.6 0" 
-          scale="4 4 4" 
-          color="#ff6699">
-        </a-text>
-      </a-entity>
+      </a-marker>
 
     </a-scene>
   </body>
 </html>
-
-
